@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Private Academy | Частное учебное заведение</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        skeu: {
+                            base: '#e6e9ef',
+                            light: '#ffffff',
+                            dark: '#d0d5e0',
+                            accent: '#3b82f6',
+                            accentDark: '#1d4ed8',
+                            text: '#2d3748',
+                            subtext: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #e6e9ef;
+            color: #2d3748;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Skeuomorphic Shadows & Effects */
+        .skeu-card {
+            background: #e6e9ef;
+            box-shadow: 10px 10px 20px #c5c9d3, -10px -10px 20px #ffffff;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .skeu-card-inset {
+            background: #e6e9ef;
+            box-shadow: inset 5px 5px 10px #c5c9d3, inset -5px -5px 10px #ffffff;
+            border-radius: 16px;
+        }
+
+        .skeu-btn {
+            background: linear-gradient(145deg, #ffffff, #dcdfe6);
+            box-shadow: 6px 6px 12px #c1c5ce, -6px -6px 12px #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+
+        .skeu-btn:hover {
+            box-shadow: 4px 4px 8px #c1c5ce, -4px -4px 8px #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .skeu-btn:active, .skeu-btn.active {
+            background: linear-gradient(145deg, #dcdfe6, #ffffff);
+            box-shadow: inset 4px 4px 8px #b8bcc5, inset -4px -4px 8px #ffffff;
+            transform: translateY(1px);
+        }
+
+        .skeu-btn-primary {
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 6px 6px 14px rgba(37, 99, 235, 0.35), -4px -4px 10px #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .skeu-btn-primary:hover {
+            background: linear-gradient(145deg, #60a5fa, #1d4ed8);
+        }
+
+        .skeu-btn-primary:active {
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .skeu-badge {
+            background: #e6e9ef;
+            box-shadow: inset 2px 2px 5px #c5c9d3, inset -2px -2px 5px #ffffff;
+            border-radius: 50px;
+        }
+
+        /* Smooth accordion transitions */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            opacity: 1;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 py-4 px-6 bg-[#e6e9ef]/90 backdrop-blur-md border-b border-white/40">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 skeu-card flex items-center justify-center text-blue-600 text-xl font-bold rounded-2xl group-hover:scale-105 transition-transform">
+                    <i class="fa-solid font-serif">L</i>
+                </div>
+                <div>
+                    <span class="font-serif text-xl font-bold tracking-tight text-slate-800 block leading-none">LUMIÈRE</span>
+                    <span class="text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Private Academy</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-2 skeu-card-inset p-1.5">
+                <a href="#about" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-xl transition-all">О нас</a>
+                <a href="#courses" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-xl transition-all">Направления</a>
+                <a href="#faculty" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-xl transition-all">Преподаватели</a>
+                <a href="#faq" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-xl transition-all">FAQ</a>
+                <a href="#contact" class="px-5 py-2 text-sm font-semibold text-slate-700 hover:text-blue-600 rounded-xl transition-all">Контакты</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="skeu-btn skeu-btn-primary px-6 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i> Подать заявку
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="py-20 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 skeu-badge text-blue-600 font-semibold text-xs tracking-wide uppercase">
+                    <i class="fa-solid fa-award"></i> Премиальное образование с 2012 года
+                </div>
+                <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-slate-900">
+                    Инвестируйте в <span class="text-blue-600">будущее</span> вашего ребенка
+                </h1>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+                    Сочетаем классическую академическую традицию с инновационными STEM-технологиями и индивидуальной образовательной траекторией.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#courses" class="skeu-btn skeu-btn-primary px-8 py-4 rounded-2xl font-bold text-base flex items-center gap-3">
+                        Выбрать программу <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#about" class="skeu-btn px-8 py-4 rounded-2xl font-bold text-slate-700 text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-play text-blue-600"></i> Экскурсия по академии
+                    </a>
+                </div>
+
+                <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-300/60">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-blue-600">98%</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Поступление в вузы</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-slate-800">1:8</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Учитель / Ученики</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-slate-800">15+</div>
+                        <div class="text-xs text-slate-500 font-medium mt-1">Международных программ</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Graphic element with Skeuomorphic design -->
+            <div class="relative">
+                <div class="skeu-card p-6 sm:p-8 relative z-10">
+                    <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden relative skeu-card-inset">
+                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80" alt="Студенты академии" class="w-full h-full object-cover opacity-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <span class="px-3 py-1 bg-blue-600/80 backdrop-blur-md rounded-full text-xs font-semibold uppercase tracking-wider">Кампус</span>
+                            <h3 class="text-xl font-bold mt-2">Инновационные лаборатории и библиотека</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 px-6 bg-slate-200/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-4 py-1.5 skeu-badge text-blue-600 font-semibold text-xs uppercase tracking-wider">О нас</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-4 text-slate-900">Академическое совершенство и гармоничное развитие</h2>
+                <p class="text-slate-600 mt-4">Мы создаем доверительную среду, где каждый студент раскрывает свой потенциал и готовится к вызовам современного мира.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="skeu-card p-8 transition-transform hover:-translate-y-2">
+                    <div class="w-16 h-16 skeu-card flex items-center justify-center text-blue-600 text-2xl mb-6 rounded-2xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Индивидуальный подход</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Небольшие классы до 12 человек позволяют преподавателям уделять внимание каждому ученику и формировать персональный учебный план.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="skeu-card p-8 transition-transform hover:-translate-y-2">
+                    <div class="w-16 h-16 skeu-card flex items-center justify-center text-blue-600 text-2xl mb-6 rounded-2xl">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">STEM & IT Практика</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Современное оборудование, робототехника, 3D-моделирование и лаборатории естественных наук дают практические навыки с первых дней.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="skeu-card p-8 transition-transform hover:-translate-y-2">
+                    <div class="w-16 h-16 skeu-card flex items-center justify-center text-blue-600 text-2xl mb-6 rounded-2xl">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Языковая погруженность</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Двуязычная программа обучения (русский/английский) с носителями языка подготовят к поступлению в лучшие международные вузы.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES / DIRECTIONS SECTION -->
+    <section id="courses" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="px-4 py-1.5 skeu-badge text-blue-600 font-semibold text-xs uppercase tracking-wider">Программы</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-4 text-slate-900">Наши образовательные направления</h2>
+                </div>
+
+                <!-- Category Sorting Filters -->
+                <div class="mt-6 md:mt-0 flex flex-wrap gap-2 skeu-card-inset p-2">
+                    <button onclick="filterCourses('all')" class="filter-btn skeu-btn px-4 py-2 text-xs font-bold rounded-xl active" data-category="all">Все</button>
+                    <button onclick="filterCourses('stem')" class="filter-btn skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-600" data-category="stem">IT & STEM</button>
+                    <button onclick="filterCourses('humanities')" class="filter-btn skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-600" data-category="humanities">Гуманитарное</button>
+                    <button onclick="filterCourses('languages')" class="filter-btn skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-600" data-category="languages">Языки</button>
+                    <button onclick="filterCourses('arts')" class="filter-btn skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-slate-600" data-category="arts">Искусство</button>
+                </div>
+            </div>
+
+            <!-- Course Cards Grid -->
+            <div id="course-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Course Item 1 -->
+                <div class="course-card skeu-card p-6 flex flex-col justify-between" data-category="stem">
+                    <div>
+                        <div class="skeu-card-inset p-4 rounded-xl mb-6 text-center">
+                            <i class="fa-solid fa-code text-4xl text-blue-600"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">IT & STEM</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2 mb-3">Прикладное программирование и ИИ</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Основы алгоритмов, веб-разработка, основы нейросетей и решение инженеров задач на Python.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-300/60 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 2 года</span>
+                        <a href="#contact" class="skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-blue-600">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Course Item 2 -->
+                <div class="course-card skeu-card p-6 flex flex-col justify-between" data-category="languages">
+                    <div>
+                        <div class="skeu-card-inset p-4 rounded-xl mb-6 text-center">
+                            <i class="fa-solid fa-language text-4xl text-blue-600"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Языки</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2 mb-3">Международный дипломатический класс</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Углубленное изучение английского и второго иностранного (французский/китайский), дебаты и публичные выступления.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-300/60 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 3 года</span>
+                        <a href="#contact" class="skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-blue-600">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Course Item 3 -->
+                <div class="course-card skeu-card p-6 flex flex-col justify-between" data-category="stem">
+                    <div>
+                        <div class="skeu-card-inset p-4 rounded-xl mb-6 text-center">
+                            <i class="fa-solid fa-atom text-4xl text-blue-600"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">IT & STEM</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2 mb-3">Биотехнологии и медицинская подготовка</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Практическая химия, генетика, биоинформатика и лабораторные исследования.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-300/60 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 2 года</span>
+                        <a href="#contact" class="skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-blue-600">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Course Item 4 -->
+                <div class="course-card skeu-card p-6 flex flex-col justify-between" data-category="humanities">
+                    <div>
+                        <div class="skeu-card-inset p-4 rounded-xl mb-6 text-center">
+                            <i class="fa-solid fa-book-open text-4xl text-blue-600"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Гуманитарное</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2 mb-3">История искусств и философия</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Критическое мышление, мировая культура, написание эссе и подготовка к гуманитарным олимпиадам.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-300/60 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 год</span>
+                        <a href="#contact" class="skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-blue-600">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Course Item 5 -->
+                <div class="course-card skeu-card p-6 flex flex-col justify-between" data-category="arts">
+                    <div>
+                        <div class="skeu-card-inset p-4 rounded-xl mb-6 text-center">
+                            <i class="fa-solid fa-palette text-4xl text-blue-600"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Искусство</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2 mb-3">Цифровой дизайн и медиа</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Графический дизайн, видеомонтаж, 3D-анимация и создание собственного портфолио.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-300/60 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 2 года</span>
+                        <a href="#contact" class="skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-blue-600">Подробнее</a>
+                    </div>
+                </div>
+
+                <!-- Course Item 6 -->
+                <div class="course-card skeu-card p-6 flex flex-col justify-between" data-category="humanities">
+                    <div>
+                        <div class="skeu-card-inset p-4 rounded-xl mb-6 text-center">
+                            <i class="fa-solid fa-chart-line text-4xl text-blue-600"></i>
+                        </div>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Гуманитарное</span>
+                        <h3 class="text-xl font-bold text-slate-800 mt-2 mb-3">Бизнес и предпринимательство</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">Основы экономики, финансовая грамотность, защита собственных стартап-проектов.</p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-300/60 flex items-center justify-between">
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 год</span>
+                        <a href="#contact" class="skeu-btn px-4 py-2 text-xs font-bold rounded-xl text-blue-600">Подробнее</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FACULTY SECTION -->
+    <section id="faculty" class="py-20 px-6 bg-slate-200/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-4 py-1.5 skeu-badge text-blue-600 font-semibold text-xs uppercase tracking-wider">Команда</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-4 text-slate-900">Наши преподаватели</h2>
+                <p class="text-slate-600 mt-4">Доктора наук, международные эксперты и увлеченные наставники.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Faculty 1 -->
+                <div class="skeu-card p-6 text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full skeu-card-inset p-2 mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Елена Соколова" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800">Елена Соколова</h3>
+                    <p class="text-xs text-blue-600 font-semibold mt-1">Доктор математических наук</p>
+                    <p class="text-slate-600 text-xs mt-3">Стаж 15 лет. Автор уникальной методики преподавания высшей математики.</p>
+                </div>
+
+                <!-- Faculty 2 -->
+                <div class="skeu-card p-6 text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full skeu-card-inset p-2 mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Александр Волков" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800">Александр Волков</h3>
+                    <p class="text-xs text-blue-600 font-semibold mt-1">Руководитель STEM-лаборатории</p>
+                    <p class="text-slate-600 text-xs mt-3">Экс-инженер яндекс, ментор победителей международной олимпиады по робототехнике.</p>
+                </div>
+
+                <!-- Faculty 3 -->
+                <div class="skeu-card p-6 text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full skeu-card-inset p-2 mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1580894732468-9fe823880d46?auto=format&fit=crop&w=400&q=80" alt="Сара Миллер" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800">Сара Миллер</h3>
+                    <p class="text-xs text-blue-600 font-semibold mt-1">Преподаватель Английского</p>
+                    <p class="text-slate-600 text-xs mt-3">Носитель языка из Великобритании (MA TESOL), специалист по подготовке к IELTS/SAT.</p>
+                </div>
+
+                <!-- Faculty 4 -->
+                <div class="skeu-card p-6 text-center group">
+                    <div class="w-32 h-32 mx-auto rounded-full skeu-card-inset p-2 mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Мария Морозова" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800">Мария Морозова</h3>
+                    <p class="text-xs text-blue-600 font-semibold mt-1">Куратор Искусств и Дизайна</p>
+                    <p class="text-slate-600 text-xs mt-3">Член союза художников, эксперт по мультимедийному искусству и архитектурному дизайну.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="px-4 py-1.5 skeu-badge text-blue-600 font-semibold text-xs uppercase tracking-wider">Ответы на вопросы</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-4 text-slate-900">Часто задаваемые вопросы</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="skeu-card faq-item cursor-pointer p-6 transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-base sm:text-lg">Как проходит вступительное испытание?</h3>
+                        <i class="fa-solid fa-chevron-down faq-icon text-blue-600 transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm mt-4 leading-relaxed">
+                            Вступительные испытания включают комплексное тестирование по базовым предметам (математика, язык) и собеседование с психологом и академическим директором для определения интересов ученика.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="skeu-card faq-item cursor-pointer p-6 transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-base sm:text-lg">Какое максимальное количество детей в классе?</h3>
+                        <i class="fa-solid fa-chevron-down faq-icon text-blue-600 transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm mt-4 leading-relaxed">
+                            Мы держим планку не более 12-14 человек в классе, что гарантирует индивидуальное внимание преподавателя каждому студенту.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="skeu-card faq-item cursor-pointer p-6 transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-base sm:text-lg">Предусмотрено ли питание и трансфер?</h3>
+                        <i class="fa-solid fa-chevron-down faq-icon text-blue-600 transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm mt-4 leading-relaxed">
+                            Да, в стоимость обучения входит 5-разовое сбалансированное питание от нашего шеф-повара (с учетом индивидуальных диет) и услуга трансфера на комфортабельных автобусах.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="skeu-card faq-item cursor-pointer p-6 transition-all" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 text-base sm:text-lg">Получают ли выпускники аттестат государственного образца?</h3>
+                        <i class="fa-solid fa-chevron-down faq-icon text-blue-600 transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-slate-600 text-sm mt-4 leading-relaxed">
+                            Да, академия имеет государственную аккредитацию и лицензию. Выпускники получают государственный аттестат, а также международные сертификаты.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM SECTION -->
+    <section id="contact" class="py-20 px-6 bg-slate-200/40">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="px-4 py-1.5 skeu-badge text-blue-600 font-semibold text-xs uppercase tracking-wider">Связаться с нами</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold mt-4 text-slate-900">Запишитесь на день открытых дверей</h2>
+                    <p class="text-slate-600 mt-4 leading-relaxed">Оставьте заявку, и наш куратор свяжется с вами для записи на персональную экскурсию по академии.</p>
+                    
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 skeu-card flex items-center justify-center text-blue-600 text-lg rounded-xl">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Адрес кампуса</h4>
+                                <p class="text-xs text-slate-600">г. Москва, ул. Академическая, д. 42</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 skeu-card flex items-center justify-center text-blue-600 text-lg rounded-xl">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">Телефон приемной</h4>
+                                <p class="text-xs text-slate-600">+7 (495) 800-12-34</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Card -->
+                <div class="skeu-card p-8">
+                    <form onsubmit="submitForm(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">Ваше имя</label>
+                            <input type="text" required placeholder="Иван Иванов" class="w-full px-4 py-3 skeu-card-inset text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">Телефон</label>
+                            <input type="tel" required placeholder="+7 (999) 000-00-00" class="w-full px-4 py-3 skeu-card-inset text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">Класс поступления</label>
+                            <select class="w-full px-4 py-3 skeu-card-inset text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>1 - 4 класс (Начальная школа)</option>
+                                <option>5 - 9 класс (Средняя школа)</option>
+                                <option>10 - 11 класс (Старшая профильная школа)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-2">Сообщение или вопрос</label>
+                            <textarea rows="3" placeholder="Расскажите о вашей цели..." class="w-full px-4 py-3 skeu-card-inset text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full skeu-btn skeu-btn-primary py-4 rounded-xl font-bold text-sm tracking-wide uppercase mt-2">
+                            Отправить заявку
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-6 border-t border-slate-300">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 skeu-card flex items-center justify-center text-blue-600 text-lg font-bold rounded-xl">
+                    <i class="fa-solid font-serif">L</i>
+                </div>
+                <span class="font-serif font-bold text-slate-800">LUMIÈRE ACADEMY</span>
+            </div>
+
+            <p class="text-xs text-slate-500">© 2026 Lumière Private Academy. Все права защищены.</p>
+
+            <div class="flex items-center gap-4">
+                <a href="#" class="w-10 h-10 skeu-btn flex items-center justify-center text-slate-600 rounded-xl"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="w-10 h-10 skeu-btn flex items-center justify-center text-slate-600 rounded-xl"><i class="fa-brands fa-vk"></i></a>
+                <a href="#" class="w-10 h-10 skeu-btn flex items-center justify-center text-slate-600 rounded-xl"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Category Filtering
+        function filterCourses(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            const cards = document.querySelectorAll('.course-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Accordion functionality
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+        }
+
+        // Form Submission
+        function submitForm(event) {
+            event.preventDefault();
+            alert('Спасибо за заявку! Наш куратор свяжется с вами в ближайшее время.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
